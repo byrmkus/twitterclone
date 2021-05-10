@@ -11,4 +11,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Acikgri">#DD999999</color>
+    <color name="saydamGri">#34999999</color>
 </resources>

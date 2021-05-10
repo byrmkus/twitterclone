@@ -4,7 +4,7 @@ package com.baykus.twitterclone.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class    ProfilFoto {
+public class ProfilFoto {
 
     @SerializedName("mesaj")
     @Expose
@@ -14,7 +14,7 @@ public class    ProfilFoto {
     private String status;
     @SerializedName("id")
     @Expose
-    private String id;
+    private int id;
     @SerializedName("kullaniciadi")
     @Expose
     private String kullaniciadi;
@@ -44,11 +44,11 @@ public class    ProfilFoto {
         this.status = status;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

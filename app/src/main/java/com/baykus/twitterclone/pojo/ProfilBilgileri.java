@@ -1,11 +1,11 @@
-
 package com.baykus.twitterclone.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CRUDCevap {
+import java.io.Serializable;
 
+public class ProfilBilgileri implements Serializable {
     @SerializedName("status")
     @Expose
     private String status;
@@ -18,12 +18,12 @@ public class CRUDCevap {
     @SerializedName("kullaniciadi")
     @Expose
     private String kullaniciadi;
-    @SerializedName("mail")
-    @Expose
-    private String mail;
     @SerializedName("adsoyad")
     @Expose
     private String adsoyad;
+    @SerializedName("mail")
+    @Expose
+    private String mail;
     @SerializedName("avatar")
     @Expose
     private String avatar;
@@ -60,20 +60,20 @@ public class CRUDCevap {
         this.kullaniciadi = kullaniciadi;
     }
 
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
     public String getAdsoyad() {
         return adsoyad;
     }
 
     public void setAdsoyad(String adsoyad) {
         this.adsoyad = adsoyad;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getAvatar() {
@@ -84,4 +84,17 @@ public class CRUDCevap {
         this.avatar = avatar;
     }
 
+    @Override
+    public String toString() {
+        return "ProfilBilgileri{" +
+                "status='" + status + '\'' +
+                ", mesaj='" + mesaj + '\'' +
+                ", id='" + id + '\'' +
+                ", kullaniciadi='" + kullaniciadi + '\'' +
+                ", adsoyad='" + adsoyad + '\'' +
+                ", mail='" + mail + '\'' +
+                ", avatar='" + avatar + '\'' +
+                '}';
+    }
 }
+

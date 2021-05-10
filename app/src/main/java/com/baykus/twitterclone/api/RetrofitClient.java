@@ -10,11 +10,13 @@ public class RetrofitClient {
     public static Retrofit getClient(String baseURL) {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseURL)
+                    .baseUrl(ApiUtils.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
+
+
 
 }

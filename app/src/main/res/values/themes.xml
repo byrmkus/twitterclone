@@ -31,4 +31,15 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <!--Menu Style-->
+    <style name="navigationTheme">
+        <!--Color of text and icon when SELECTED-->
+        <item name="colorPrimary">@color/purple_500</item>
+        <!--Background color when SELECTED-->
+        <item name="colorControlHighlight">@color/black</item>
+
+
+
+    </style>
 </resources>

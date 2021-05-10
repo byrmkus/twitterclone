@@ -1,10 +1,14 @@
 
 package com.baykus.twitterclone.pojo;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Login {
+import java.io.Serializable;
+
+
+public class Register implements Serializable {
 
     @SerializedName("status")
     @Expose
@@ -86,7 +90,7 @@ public class Login {
 
     @Override
     public String toString() {
-        return "Login{" +
+        return "Register{" +
                 "status='" + status + '\'' +
                 ", mesaj='" + mesaj + '\'' +
                 ", id='" + id + '\'' +
@@ -97,4 +101,3 @@ public class Login {
                 '}';
     }
 }
-

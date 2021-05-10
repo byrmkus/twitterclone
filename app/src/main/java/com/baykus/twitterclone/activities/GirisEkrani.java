@@ -1,4 +1,4 @@
-package com.baykus.twitterclone;
+package com.baykus.twitterclone.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +29,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.baykus.twitterclone.R;
 import com.baykus.twitterclone.api.ApiUtils;
 import com.baykus.twitterclone.api.KisilerDao;
 import com.baykus.twitterclone.pojo.Login;
@@ -56,7 +56,7 @@ public class GirisEkrani extends AppCompatActivity {
     private TextInputEditText kulaniciAdi, sifre;
     private CheckBox benihatirla;
     private RequestQueue requestQueue;
-    private static final String url_login = "http://busrakus.cf/twitterclone/login.php";
+    private static final String url_login = "https://bayramkus.com/twitterclone/login.php";
     private KisilerDao kisilerDao;
     private SharedPreferences preferences;
     private boolean istekGonderildi = false;
@@ -76,8 +76,9 @@ public class GirisEkrani extends AppCompatActivity {
 
 
         preferences= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                requestQueue= Volley.newRequestQueue(getApplicationContext());
+               // requestQueue= Volley.newRequestQueue(getApplicationContext());
         kisilerDao = ApiUtils.getKisilerDao();
+
 //beni hatırla seçiliyse direk ana ekrana geçiş
         if (preferences.getBoolean("benihatirla", false)) {
             Intent intent=new Intent(GirisEkrani.this, TwitterNavDrawerActivity.class);
@@ -154,7 +155,7 @@ public class GirisEkrani extends AppCompatActivity {
                         Snackbar.make(findViewById(R.id.frameLayoutGirisEkrani), "Lütfen internet baglantisini kontrol ediniz...",
                                 Snackbar.LENGTH_LONG).show();
                     } else {
-    Log.e("asdf","girşi");
+
                         girisYapRetrofit();
                        //girisYapVolley();
 
@@ -228,10 +229,12 @@ public class GirisEkrani extends AppCompatActivity {
     private void girisYapRetrofit() {
         String kullaniciAdi = kulaniciAdi.getText().toString();
         String sifre1 = sifre.getText().toString();
-
+        Log.e("asdf","girşi");
         kisilerDao.kisiLogin(kullaniciAdi,sifre1).enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, retrofit2.Response<Login> response) {
+                Log.e("asdf1","girşi1");
+                Log.e("asdf1",response.body().toString());
 
                 if (response.body().getStatus().equals("200")){
 

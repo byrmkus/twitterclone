@@ -1,20 +1,12 @@
-
 package com.baykus.twitterclone.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Login {
-
-    @SerializedName("status")
-    @Expose
-    private String status;
-    @SerializedName("mesaj")
-    @Expose
-    private String mesaj;
+public class Kullanicilar {
     @SerializedName("id")
     @Expose
-    private String id;
+    private Integer id;
     @SerializedName("kullaniciadi")
     @Expose
     private String kullaniciadi;
@@ -28,27 +20,11 @@ public class Login {
     @Expose
     private String avatar;
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getMesaj() {
-        return mesaj;
-    }
-
-    public void setMesaj(String mesaj) {
-        this.mesaj = mesaj;
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -83,18 +59,4 @@ public class Login {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
-
-    @Override
-    public String toString() {
-        return "Login{" +
-                "status='" + status + '\'' +
-                ", mesaj='" + mesaj + '\'' +
-                ", id='" + id + '\'' +
-                ", kullaniciadi='" + kullaniciadi + '\'' +
-                ", mail='" + mail + '\'' +
-                ", adsoyad='" + adsoyad + '\'' +
-                ", avatar='" + avatar + '\'' +
-                '}';
-    }
 }
-

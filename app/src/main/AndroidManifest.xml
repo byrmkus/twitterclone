@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.baykus.twitterclone">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 
     <application
@@ -14,25 +14,26 @@
         android:icon="@mipmap/ic_launcher_foreground"
         android:label="Twitter"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TwitterClone">
+        android:theme="@style/Theme.TwitterClone"
+        android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".ProfilActivity"
-            android:parentActivityName=".GirisEkrani">
+            android:name=".activities.ProfilActivity"
+            android:parentActivityName=".activities.TwitterNavDrawerActivity">
 
         </activity>
 
-        <activity android:name=".TwitterNavDrawerActivity"></activity>
+        <activity android:name=".activities.TwitterNavDrawerActivity"></activity>
         <activity
-            android:name=".KayitEkrani"
-            android:parentActivityName=".GirisEkrani"
+            android:name=".activities.KayitEkrani"
+            android:parentActivityName=".activities.GirisEkrani"
             android:theme="@style/Theme.TamEkran">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".GirisEkrani" />
+                android:value=".activities.GirisEkrani" />
         </activity>
         <activity
-            android:name=".GirisEkrani"
+            android:name=".activities.GirisEkrani"
             android:theme="@style/Theme.TamEkran">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,7 +44,7 @@
 
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" /> <!-- optional (needed if default theme has no action bar) -->
+            android:theme="@style/Base.Theme.AppCompat"/>  <!-- optional (needed if default theme has no action bar) -->
     </application>
 
 </manifest>
