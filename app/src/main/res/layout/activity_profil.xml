@@ -87,13 +87,23 @@
                 android:layout_below="@id/toolbar_profil"
                 app:srcCompat="@drawable/sehir"
                 tools:ignore="MissingConstraints" />
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProfil"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="20dp"
+                android:paddingTop="310dp"
+                android:paddingRight="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
         </RelativeLayout>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -101,7 +111,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile_image_2"

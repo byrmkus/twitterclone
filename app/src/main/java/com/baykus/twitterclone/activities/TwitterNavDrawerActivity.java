@@ -57,6 +57,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,7 +66,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TwitterNavDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class TwitterNavDrawerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener ,Serializable{
 
     static final float END_SCALE= 0.7f;
     private NavigationView navigationView;
@@ -88,7 +89,7 @@ public class TwitterNavDrawerActivity extends AppCompatActivity implements Navig
     private GradientDrawable gradient1, gradient2, gradient3, gradient4;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter_nav_drawer);
         fabtweet = findViewById(R.id.fabtweet);
@@ -184,6 +185,29 @@ public class TwitterNavDrawerActivity extends AppCompatActivity implements Navig
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_tutucu, tempFragment).commit();
                 return true;
+            }
+        });
+
+        //Kullanıcı Arama işlermleri
+
+
+        editSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                tempFragment=new Search();
+                bundle.putString("search_text",s.toString().toLowerCase());
+                tempFragment.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_tutucu, tempFragment).commit();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 

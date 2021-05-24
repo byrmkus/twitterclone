@@ -3,36 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:id="@+id/LinearLayoutSearch"
-    android:padding="7dp">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp"
+    android:paddingRight="10dp"
+    tools:context="com.lyadirga.twitterclone.KisiTweetleriActivity">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView_arama"
         android:layout_width="match_parent"
-        android:clickable="true"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="@dimen/cardview_default_elevation"
-        app:contentPadding="2dp">
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="@dimen/cardview_default_radius"
+        app:cardElevation="4dp"
+        app:contentPadding="8dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image_arama"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image_kisi"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@mipmap/icon"
                 android:transitionName="profilImage"
                 app:civ_border_color="@color/purple_500"
-                app:civ_border_width="2dp"/>
-            <!-- app:civ_border_width="1dp"
-             app:civ_border_color="?attr/colorAccent"-->
-
+                app:civ_border_width="2dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,30 +41,43 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/aramaAdsoyad"
+                    android:id="@+id/kisiAdsoyad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Levent YADIRGA"
-                    android:textStyle="bold"
+                    android:text="Bayram KUŞ"
                     android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
                     android:transitionName="adsoyad" />
 
                 <TextView
-                    android:id="@+id/aramaKullaniciadi"
+                    android:id="@+id/kisiKullaniciadi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="lyadirga"
+                    android:text="byrmks"
                     android:textColor="@color/cardview_dark_background"
+                    android:textSize="16sp"
                     android:transitionName="kullaniciadi" />
 
                 <TextView
-                    android:id="@+id/aramaMail"
+                    android:id="@+id/kisiMail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="lyadirga@gmail.com"
-                   />
+                    android:text="byrmks@gmail.com"
+                    android:textSize="16sp" />
 
             </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/kisitweetleriRv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
 </LinearLayout>

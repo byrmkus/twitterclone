@@ -32,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TweetlerAdapter extends RecyclerView.Adapter<TweetlerAdapter.CardTasarimTutucu>  {
+public class TweetlerAdapter extends RecyclerView.Adapter<TweetlerAdapter.CardTasarimTutucu> {
     private Context mContext;
     private List<Tweetler> tweetlerList;
 
@@ -45,7 +45,7 @@ public class TweetlerAdapter extends RecyclerView.Adapter<TweetlerAdapter.CardTa
     @Override
     public CardTasarimTutucu onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        TweetCardTasarimBinding tweetCardTasarimBinding = TweetCardTasarimBinding.inflate(inflater,parent,false);
+        TweetCardTasarimBinding tweetCardTasarimBinding = TweetCardTasarimBinding.inflate(inflater, parent, false);
 
 
         return new CardTasarimTutucu(tweetCardTasarimBinding);
@@ -57,46 +57,46 @@ public class TweetlerAdapter extends RecyclerView.Adapter<TweetlerAdapter.CardTa
         Tweetler tweet = tweetlerList.get(position);
         holder.binding.txtAdSoyad.setText(tweet.getAdsoyad());
         holder.binding.tweetText.setText(tweet.getText());
-        holder.binding.txtKullaniciAdi.setText("@"+tweet.getKullaniciadi());
+        holder.binding.txtKullaniciAdi.setText("@" + tweet.getKullaniciadi());
 
 
-        if (!tweet.getAvatar().equals("")){
+        if (!tweet.getAvatar().equals("")) {
             Picasso.get().load(tweet.getAvatar())
                     .memoryPolicy(MemoryPolicy.NO_CACHE)
                     .networkPolicy(NetworkPolicy.NO_CACHE)
                     .into(holder.binding.profileImageTweet);
         }
-        if (!tweet.getPath().equals("")){
+        if (!tweet.getPath().equals("")) {
             Picasso.get().load(tweet.getPath()).into(holder.binding.imageTweet);
         }
 
-        dateFormat(holder,tweet);
-holder.binding.tweetCardView.setOnLongClickListener(new View.OnLongClickListener() {
-    @Override
-    public boolean onLongClick(View v) {
-        holder.binding.tweetCardView.setAlpha(.5f);
+        dateFormat(holder, tweet);
+        holder.binding.tweetCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                holder.binding.tweetCardView.setAlpha(.5f);
 
-        new AlertDialog.Builder(mContext)
-                .setTitle("Tweet Sil")
-                .setMessage("Tweeti silmek istediğinizden emin misiniz?")
-                .setPositiveButton("Sil", new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(mContext)
+                        .setTitle("Tweet Sil")
+                        .setMessage("Tweeti silmek istediğinizden emin misiniz?")
+                        .setPositiveButton("Sil", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                tweetSil(position, tweet.getUuid());
+
+                            }
+                        }).setNegativeButton("Vazgeç", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
-                        tweetSil(position,tweet.getUuid());
+                        holder.binding.tweetCardView.setAlpha(1.0f);
 
                     }
-                }).setNegativeButton("Vazgeç", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                holder.binding.tweetCardView.setAlpha(1.0f);
+                }).show();
 
+                return true;
             }
-        }).show();
-
-        return true;
-    }
-});
+        });
 
 
     }
@@ -132,42 +132,42 @@ holder.binding.tweetCardView.setOnLongClickListener(new View.OnLongClickListener
     }
 
     //Tarih saat ayarları yapıyoruz atılan tweetler için
-    private void dateFormat(@NonNull CardTasarimTutucu holder,Tweetler tweet) {
+    private void dateFormat(@NonNull CardTasarimTutucu holder, Tweetler tweet) {
         Date simdi = new Date();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date tarih=null;
+        Date tarih = null;
         try {
             tarih = dateFormat.parse(tweet.getDate());
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        int fark = (int) (simdi.getTime()-tarih.getTime());
+        int fark = (int) (simdi.getTime() - tarih.getTime());
 
 
-        int gun = fark/(1000*60*60*24);
-        int saat = fark/(1000*60*60);
-        int dakika = fark/(1000*60);
-        int saniye = fark/(1000);
+        int gun = fark / (1000 * 60 * 60 * 24);
+        int saat = fark / (1000 * 60 * 60);
+        int dakika = fark / (1000 * 60);
+        int saniye = fark / (1000);
 
-        if (saniye==0)
+        if (saniye == 0)
             holder.binding.txtTarih.setText("şimdi");
-        if (saniye>0 && dakika==0)
-            holder.binding.txtTarih.setText(saniye+"s");
-        if (dakika>0 && saat==0)
-            holder.binding.txtTarih.setText(dakika+"dk");
-        if (saat>0 && gun==0)
-            holder.binding.txtTarih.setText(saat+"sa");
-        if (gun>0)
-            holder.binding.txtTarih.setText(gun+"gün");
+        if (saniye > 0 && dakika == 0)
+            holder.binding.txtTarih.setText(saniye + "s");
+        if (dakika > 0 && saat == 0)
+            holder.binding.txtTarih.setText(dakika + "dk");
+        if (saat > 0 && gun == 0)
+            holder.binding.txtTarih.setText(saat + "sa");
+        if (gun > 0)
+            holder.binding.txtTarih.setText(gun + "gün");
     }
 
     @Override
     public int getItemCount() {
-        if (tweetlerList==null){
+        if (tweetlerList == null) {
             return 0;
-        }else
-        return tweetlerList.size();
+        } else
+            return tweetlerList.size();
     }
 
     public class CardTasarimTutucu extends RecyclerView.ViewHolder {

@@ -2,6 +2,7 @@ package com.baykus.twitterclone.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.Manifest;
@@ -20,11 +21,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.baykus.twitterclone.R;
+import com.baykus.twitterclone.adapters.TweetlerAdapter;
 import com.baykus.twitterclone.api.ApiUtils;
 import com.baykus.twitterclone.api.KisilerDao;
 import com.baykus.twitterclone.databinding.ActivityProfilBinding;
+import com.baykus.twitterclone.pojo.GetKisiTweetler;
 import com.baykus.twitterclone.pojo.ProfilBilgileri;
 import com.baykus.twitterclone.pojo.ProfilFoto;
+import com.baykus.twitterclone.pojo.Tweetler;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -34,6 +38,8 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -46,10 +52,12 @@ public class ProfilActivity extends AppCompatActivity {
     private String avatar;
     private static final String url_profil_guncelle = "http://127.0.0.1/twitterclone/profilFotoYukle.php";
     private KisilerDao kisilerDao;
+    private List<Tweetler> profilimtTeetlerList;
     // private RequestQueue requestQueue;
 
     private ProgressDialog loading;
     ActivityProfilBinding profilBinding;
+    private TweetlerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +66,9 @@ public class ProfilActivity extends AppCompatActivity {
         View view = profilBinding.getRoot();
         setContentView(view);
 
+        profilimtTeetlerList = new ArrayList<>();
+        setAdapter();
+
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         id = preferences.getString("id", "-1");
@@ -65,7 +76,7 @@ public class ProfilActivity extends AppCompatActivity {
         // requestQueue = Volley.newRequestQueue(getApplicationContext());
 
         Log.e("id", id);
-
+        ProfilTweetistekGonder();
         getProfilBilgileri();
         profilBinding.toolbarProfil.setTitle("");
         setSupportActionBar(profilBinding.toolbarProfil);
@@ -355,5 +366,29 @@ public class ProfilActivity extends AppCompatActivity {
 //            profile_image_2.setImageBitmap(bitmap);
 //        }
 //    }
+  private void ProfilTweetistekGonder() {
+        kisilerDao.getKisiTweetler(id).enqueue(new Callback<GetKisiTweetler>() {
+            @Override
+            public void onResponse(Call<GetKisiTweetler> call, Response<GetKisiTweetler> response) {
+                profilimtTeetlerList = response.body().getTweetler();
 
+                if (profilimtTeetlerList.size()==0){
+                    Toast.makeText(ProfilActivity.this, "Tweet Bulunamadı.", Toast.LENGTH_SHORT).show();
+                }else {
+                    adapter = new TweetlerAdapter(ProfilActivity.this, profilimtTeetlerList);
+                    profilBinding.rvProfil.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetKisiTweetler> call, Throwable t) {
+
+            }
+        });
+
+    }
+    private void setAdapter() {
+        profilBinding.rvProfil.setHasFixedSize(true);
+        profilBinding.rvProfil.setLayoutManager(new LinearLayoutManager(ProfilActivity.this));
+    }
 }
