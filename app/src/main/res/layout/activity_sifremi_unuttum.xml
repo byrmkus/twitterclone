@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootSifremiUnuttum"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SifremiUnuttumActivity">
+
+
+    <Button
+        android:id="@+id/sifreSifirlaBtn"
+        android:layout_width="233dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="89dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginBottom="366dp"
+        android:background="@drawable/oval_button_seloctor"
+        android:backgroundTint="@null"
+        android:text="Sıfırlama Maili Gönder"
+        android:textColor="@color/purple_500"
+        android:textSize="12dp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="162dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/sifreSifirlaBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailsifremiunuttum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="email adresiniz"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

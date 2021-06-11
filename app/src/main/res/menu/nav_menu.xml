@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:title="">
         <menu>
             <item
                 android:id="@+id/profile_menu"
                 android:icon="@drawable/ic_person_black_24dp"
                 android:title="Profil" />
-            <item
-                android:id="@+id/nav_ikinci"
-                android:title="Ikinci" />
 
         </menu>
     </item>
-    <item android:title="Ikinci">
+    <item android:title="">
 
         <menu>
+            <item
+                android:id="@+id/nav_gecemodu"
+                app:actionLayout="@layout/navigation_drawer_swichbtn"
+                android:icon="@drawable/ic_gece_black_24dp"
+                android:title="Gece Modu" />
+
             <item
                 android:id="@+id/nav_cikis"
                 android:icon="@drawable/ic_exit_to_app_black_24dp"

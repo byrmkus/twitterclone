@@ -375,7 +375,7 @@ public class ProfilActivity extends AppCompatActivity {
                 if (profilimtTeetlerList.size()==0){
                     Toast.makeText(ProfilActivity.this, "Tweet Bulunamadı.", Toast.LENGTH_SHORT).show();
                 }else {
-                    adapter = new TweetlerAdapter(ProfilActivity.this, profilimtTeetlerList);
+                    adapter = new TweetlerAdapter(ProfilActivity.this, profilimtTeetlerList,true);
                     profilBinding.rvProfil.setAdapter(adapter);
                 }
             }

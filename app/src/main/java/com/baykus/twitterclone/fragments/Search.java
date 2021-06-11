@@ -84,25 +84,24 @@ public class Search extends Fragment {
 
                 kullanicilarList = response.body().getKullanicilar();
 
-                try {
-
-                    setAdapter();
-                    if (kullanicilarList.size() == 0) {
-                        kullanicilarList.clear();
-                        searchBinding.txtSonucBulunamadi.setText("SONUC BULUNAMADI");
-                    } else {
-                        searchBinding.txtSonucBulunamadi.setText("ARANAN KULLANICILAR");
-
-                        searchBinding.rvSearch.setAdapter(searchAdapter);
-                        searchAdapter = new SearchAdapter(mContext, kullanicilarList);
-                    }
-                } catch (NullPointerException e) {
-
-                    Log.e("NullPointException ", e.toString());
-                   // searchBinding.txtSonucBulunamadi.setText("HiÇBİR SONUC BULUNAMADI");
 
 
-                }
+                        try {
+
+                            setAdapter();
+                            if (kullanicilarList.size() == 0) {
+                                kullanicilarList.clear();
+                                searchBinding.txtSonucBulunamadi.setText("SONUC BULUNAMADI");
+                            } else {
+                                searchBinding.rvSearch.setAdapter(searchAdapter);
+                                searchAdapter = new SearchAdapter(mContext, kullanicilarList);
+                            }
+                        } catch (NullPointerException e) {
+
+                            Log.e("NullPointException ", e.toString());
+//                             searchBinding.txtSonucBulunamadi.setText("HiÇBİR SONUC BULUNAMADI");
+
+                        }
                 searchAdapter.notifyDataSetChanged();
             }
 

@@ -80,15 +80,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CardTasari
                     View profil = holder.binding.profileImageArama;
                     View adSoyad = holder.binding.aramaAdsoyad;
                     View kullaniciAdi = holder.binding.aramaKullaniciadi;
+                    View mail = holder.binding.aramaMail;
                     Pair<View, String> pairProfilFoto = Pair.create(profil, "profilImage");
                     Pair<View, String> pairAdsoyad = Pair.create(adSoyad, "adsoyad");
                     Pair<View, String> pairKullaniciadi = Pair.create(kullaniciAdi, "kullaniciadi");
+                    Pair<View, String> pairMail= Pair.create(mail, "mail");
 
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((AppCompatActivity) mContext,
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((AppCompatActivity) v.getContext(),
                             pairProfilFoto,
                             pairAdsoyad,
-                            pairKullaniciadi);
-                    mContext.startActivity(intent, options.toBundle());
+                            pairKullaniciadi,
+                            pairMail);
+                    v.getContext().startActivity(intent, options.toBundle());
 
                 } else {
                     v.getContext().startActivity(intent);

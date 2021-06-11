@@ -32,7 +32,6 @@ import retrofit2.Response;
 
 public class KisiTweetleriActivity extends AppCompatActivity {
     private String id;
-    private RequestQueue requestQueue;
     ActivityKisiTweetleriBinding binding;
     private KisilerDao kisilerDao;
     private List<Tweetler> arananKullaniciList;
@@ -61,7 +60,7 @@ public class KisiTweetleriActivity extends AppCompatActivity {
                         .networkPolicy(NetworkPolicy.NO_CACHE)
                         .into(binding.profileImageKisi);
             }
-            binding.kisiKullaniciadi.setText(intent.getStringExtra("kullaniciadi"));
+            binding.kisiKullaniciadi.setText("@"+intent.getStringExtra("kullaniciadi"));
             binding.kisiAdsoyad.setText(intent.getStringExtra("adsoyad"));
             binding.kisiMail.setText(intent.getStringExtra("mail"));
             arananKullaniciTweet();
@@ -82,7 +81,7 @@ public class KisiTweetleriActivity extends AppCompatActivity {
                     Toast.makeText(KisiTweetleriActivity.this, "Tweet Bulunamadı.", Toast.LENGTH_SHORT).show();
 
                 }else {
-                    adapter = new TweetlerAdapter(KisiTweetleriActivity.this, arananKullaniciList);
+                    adapter = new TweetlerAdapter(KisiTweetleriActivity.this, arananKullaniciList,false);
                     binding.kisitweetleriRv.setAdapter(adapter);
                 }
             }

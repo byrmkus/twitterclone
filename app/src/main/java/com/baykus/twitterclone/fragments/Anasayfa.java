@@ -86,7 +86,7 @@ public class Anasayfa extends Fragment {
                 if (tweetlerList.size()==0){
                     anasayfaBinding.txt.setText("Tweet bulunamadı..");
                 }else {
-                    adapter = new TweetlerAdapter(mContext, tweetlerList);
+                    adapter = new TweetlerAdapter(mContext, tweetlerList,false);
                     anasayfaBinding.listTweet.setAdapter(adapter);
                 }
             }
@@ -119,10 +119,10 @@ public class Anasayfa extends Fragment {
                 if (tweetlerList.size()==0){
                     anasayfaBinding.txt.setText("Tweet bulunamadı..");
 
-                    adapter = new TweetlerAdapter(mContext, tweetlerList);
+                    adapter = new TweetlerAdapter(mContext, tweetlerList,false);
                     anasayfaBinding.listTweet.setAdapter(adapter);
                 }else {
-                    adapter = new TweetlerAdapter(mContext, tweetlerList);
+                    adapter = new TweetlerAdapter(mContext, tweetlerList,false);
                     anasayfaBinding.listTweet.setAdapter(adapter);
                 }
             }

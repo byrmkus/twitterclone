@@ -35,10 +35,12 @@ import retrofit2.Response;
 public class TweetlerAdapter extends RecyclerView.Adapter<TweetlerAdapter.CardTasarimTutucu> {
     private Context mContext;
     private List<Tweetler> tweetlerList;
+    private boolean silmeIslemi;
 
-    public TweetlerAdapter(Context mContext, List<Tweetler> tweetlerList) {
+    public TweetlerAdapter(Context mContext, List<Tweetler> tweetlerList, boolean silmeIslemi) {
         this.mContext = mContext;
         this.tweetlerList = tweetlerList;
+        this.silmeIslemi = silmeIslemi;
     }
 
     @NonNull
@@ -71,33 +73,36 @@ public class TweetlerAdapter extends RecyclerView.Adapter<TweetlerAdapter.CardTa
         }
 
         dateFormat(holder, tweet);
-        holder.binding.tweetCardView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                holder.binding.tweetCardView.setAlpha(.5f);
 
-                new AlertDialog.Builder(mContext)
-                        .setTitle("Tweet Sil")
-                        .setMessage("Tweeti silmek istediğinizden emin misiniz?")
-                        .setPositiveButton("Sil", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+        if (silmeIslemi) {
+            holder.binding.tweetCardView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    holder.binding.tweetCardView.setAlpha(.5f);
 
-                                tweetSil(position, tweet.getUuid());
+                    new AlertDialog.Builder(mContext)
+                            .setTitle("Tweet Sil")
+                            .setMessage("Tweeti silmek istediğinizden emin misiniz?")
+                            .setPositiveButton("Sil", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                            }
-                        }).setNegativeButton("Vazgeç", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        holder.binding.tweetCardView.setAlpha(1.0f);
+                                    tweetSil(position, tweet.getUuid());
 
-                    }
-                }).show();
+                                }
+                            }).setNegativeButton("Vazgeç", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            holder.binding.tweetCardView.setAlpha(1.0f);
 
-                return true;
-            }
-        });
+                        }
+                    }).show();
 
+                    return true;
+                }
+            });
+
+        }
 
     }
 

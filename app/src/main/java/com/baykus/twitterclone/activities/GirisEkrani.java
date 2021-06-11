@@ -23,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -52,7 +53,7 @@ public class GirisEkrani extends AppCompatActivity {
     private ImageView image;
     private Button btnKayit;
     private FloatingActionButton fabGiris;
-    private TextInputLayout  tilKulaniciAdi, tilSifre;
+    private TextInputLayout tilKulaniciAdi, tilSifre;
     private TextInputEditText kulaniciAdi, sifre;
     private CheckBox benihatirla;
     private RequestQueue requestQueue;
@@ -60,6 +61,7 @@ public class GirisEkrani extends AppCompatActivity {
     private KisilerDao kisilerDao;
     private SharedPreferences preferences;
     private boolean istekGonderildi = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,19 +77,19 @@ public class GirisEkrani extends AppCompatActivity {
         benihatirla = findViewById(R.id.checkboxBeniHatırla);
 
 
-        preferences= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-               // requestQueue= Volley.newRequestQueue(getApplicationContext());
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        // requestQueue= Volley.newRequestQueue(getApplicationContext());
         kisilerDao = ApiUtils.getKisilerDao();
 
 //beni hatırla seçiliyse direk ana ekrana geçiş
         if (preferences.getBoolean("benihatirla", false)) {
-            Intent intent=new Intent(GirisEkrani.this, TwitterNavDrawerActivity.class);
-            intent.putExtra("animasyon",true);
+            Intent intent = new Intent(GirisEkrani.this, TwitterNavDrawerActivity.class);
+            intent.putExtra("animasyon", true);
             startActivity(intent);
             GirisEkrani.this.finish();
 
         }
-   
+
 //internet bağlantısı kontrolu yapıyoruz..
         if (!InternetBaglantiKontrol()) {
             Snackbar.make(findViewById(R.id.frameLayoutGirisEkrani), "Lütfen internet baglantisini kontrol ediniz...",
@@ -98,15 +100,24 @@ public class GirisEkrani extends AppCompatActivity {
         findViewById(R.id.txtSifremiUnuttum).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_DOWN){
-                    ((TextView)v).setTextColor(Color.parseColor("#DD999999"));
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    ((TextView) v).setTextColor(Color.parseColor("#DD999999"));
                 }
-                if (event.getAction()==MotionEvent.ACTION_UP){
-                    ((TextView)v).setTextColor(Color.WHITE);
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    ((TextView) v).setTextColor(Color.WHITE);
                 }
 
-                return true;//tıklanma eventini etkilememesi için false bırakıyoruz...
+                return false;//tıklanma eventini etkilememesi için false bırakıyoruz...
 
+
+            }
+        });
+
+        findViewById(R.id.txtSifremiUnuttum).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GirisEkrani.this,SifremiUnuttumActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -157,7 +168,7 @@ public class GirisEkrani extends AppCompatActivity {
                     } else {
 
                         girisYapRetrofit();
-                       //girisYapVolley();
+                        //girisYapVolley();
 
                     }
 
@@ -170,7 +181,7 @@ public class GirisEkrani extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(GirisEkrani.this,KayitEkrani.class));
+                startActivity(new Intent(GirisEkrani.this, KayitEkrani.class));
             }
         });
     }
@@ -187,19 +198,19 @@ public class GirisEkrani extends AppCompatActivity {
                     String mesaj = json.getString("mesaj");
                     String durum = json.getString("status");
 
-                    if (durum.equals("200")){
+                    if (durum.equals("200")) {
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("id", json.getString("id"));
                         editor.putBoolean("benihatirla", benihatirla.isChecked());
                         editor.commit();
                         //ana ekrana geçiş
-                        Intent intent=new Intent(GirisEkrani.this, TwitterNavDrawerActivity.class);
-                        intent.putExtra("animasyon",true);
+                        Intent intent = new Intent(GirisEkrani.this, TwitterNavDrawerActivity.class);
+                        intent.putExtra("animasyon", true);
                         startActivity(intent);
                         GirisEkrani.this.finish();
                         //ana ekrana geçiş.
 
-                    }else {
+                    } else {
                         Toast.makeText(GirisEkrani.this, mesaj, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
@@ -212,7 +223,7 @@ public class GirisEkrani extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> degerler = new HashMap<>();
@@ -229,24 +240,27 @@ public class GirisEkrani extends AppCompatActivity {
     private void girisYapRetrofit() {
         String kullaniciAdi = kulaniciAdi.getText().toString();
         String sifre1 = sifre.getText().toString();
-        Log.e("asdf","girşi");
-        kisilerDao.kisiLogin(kullaniciAdi,sifre1).enqueue(new Callback<Login>() {
+        Log.e("asdf", "girşi");
+        kisilerDao.kisiLogin(kullaniciAdi, sifre1).enqueue(new Callback<Login>() {
             @Override
             public void onResponse(Call<Login> call, retrofit2.Response<Login> response) {
-                Log.e("asdf1","girşi1");
-                Log.e("asdf1",response.body().toString());
+                Log.e("asdf1", "girşi1");
+                Log.e("asdf1", response.body().toString());
 
-                if (response.body().getStatus().equals("200")){
+                if (response.body().getStatus().equals("200")) {
 
-                    startActivity(new Intent(GirisEkrani.this,TwitterNavDrawerActivity.class));
+
+                    startActivity(new Intent(GirisEkrani.this, TwitterNavDrawerActivity.class)
+                            .putExtra("animasyon", true));
+
                     GirisEkrani.this.finish();
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("id",response.body().getId());
-                    editor.putBoolean("benihatirla",benihatirla.isChecked());
+                    editor.putString("id", response.body().getId());
+                    editor.putBoolean("benihatirla", benihatirla.isChecked());
                     editor.commit();
 
-                }else {
-                    Toast.makeText(GirisEkrani.this,response.body().getMesaj(),Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(GirisEkrani.this, response.body().getMesaj(), Toast.LENGTH_LONG).show();
                 }
             }
 

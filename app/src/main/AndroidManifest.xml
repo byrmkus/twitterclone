@@ -15,15 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TwitterClone"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".activities.KisiTweetleriActivity">
-
-
-        </activity>
-
+        <activity android:name=".activities.SifremiUnuttumActivity"></activity>
+        <activity android:name=".activities.KisiTweetleriActivity"></activity>
         <activity
             android:name=".activities.ProfilActivity"
-            android:parentActivityName=".activities.TwitterNavDrawerActivity"></activity>
+            android:parentActivityName=".activities.TwitterNavDrawerActivity" />
         <activity android:name=".activities.TwitterNavDrawerActivity" />
         <activity
             android:name=".activities.KayitEkrani"

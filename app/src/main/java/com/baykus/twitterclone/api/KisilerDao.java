@@ -6,6 +6,7 @@ import com.baykus.twitterclone.pojo.ProfilBilgileri;
 import com.baykus.twitterclone.pojo.ProfilFoto;
 import com.baykus.twitterclone.pojo.Register;
 import com.baykus.twitterclone.pojo.SelectUsers;
+import com.baykus.twitterclone.pojo.SifreSifirla;
 import com.baykus.twitterclone.pojo.TweetSil;
 import com.baykus.twitterclone.pojo.Tweetler;
 
@@ -62,4 +63,8 @@ public interface KisilerDao {
     @FormUrlEncoded
     Call<SelectUsers> kullaniciAra(@Field("id") String id,
                                    @Field("word") String avatar);
+
+    @POST("twitterclone/sifreyiSifirla.php")
+    @FormUrlEncoded
+    Call<SifreSifirla> sifreSifirla(@Field("mail") String mail);
 }
